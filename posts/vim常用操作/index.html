@@ -6,12 +6,12 @@
   <meta name="author" content="Dong Yuanxin">
   
   
-  <title>linux压缩解压命令 | 韩鹏的个人博客</title>
+  <title>vim常用操作 | 韩鹏的个人博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="linux命令,linux,">
+    <meta name="keywords" content="linux命令,vim,">
   
 
   
@@ -178,36 +178,27 @@
     
   </div>
   <h1 class="passage-title">
-    linux压缩解压命令
+    vim常用操作
   </h1>
   
   <article class="passage-article">
-    <pre><code>压缩命令：gzip
-</code></pre><p>命令名称：gzip<br>命令英文愿意：GNU zip<br>命令所在路径：/bin/gzip<br>执行权限：所有用户<br>语法：gzip [文件]<br>功能描述：压缩文件<br>压缩文件格式：.gz</p>
-<pre><code>解压命令：gunzip  (只能压缩文件 只保留压缩包 不保留原文件)
-</code></pre><p>命令名称：gunzip<br>命令英文愿意：GNU unzip<br>命令所在路径：/bin/gunzip<br>执行权限：所有用户<br>语法：gunzip [压缩文件]<br>功能描述：解压缩gz的压缩文件<br>范例：$ gunzip boduo.gz</p>
-<pre><code>压缩命令：tar
-</code></pre><p>命令名称；tar<br>命令所在路径：/bin/tar<br>执行权限：所有用户<br>语法：tar [选项 -zcf] [压缩后文件名] [目录]</p>
-<pre><code>-c 打包
--v 显示详细信息
--f 指定文件名
--z 打包同时压缩
-</code></pre><p>功能描述：打包目录<br>压缩后文件格式：tar.gz</p>
-<pre><code>解压命令：tar
-</code></pre><p>tar命令解压语法：</p>
-<pre><code>-x 解包
--v 显示详细信息
--f 指定解压文件
--z 解压缩
-</code></pre><p>范例：$ tar -zxvf Japan.tar.gz</p>
-<pre><code>压缩命令：zip
-</code></pre><p>命令名称：zip<br>命令所在路径：/usr/bin/zip<br>执行权限：所有用户<br>语法：zip 选项[-r] [压缩后文件名] [文件或目录]<br>           -r 压缩目录<br>功能描述：压缩文件或目录<br>压缩文件格式：.zip</p>
-<pre><code>解压命令：unzip
-</code></pre><p>命令名称：unzip<br>命令所在路径：/usr/bin/unzip<br>执行权限：所有用户<br>语法：unzip [压缩文件]<br>           -r 压缩目录<br>功能描述：解压.zip的压缩文件<br>范例：$ unzip test.zip</p>
-<pre><code>压缩命令：bzip2
-</code></pre><p>命令名称：bzip2<br>命令所在路径：/usr/bin/bzip2<br>执行权限：所有用户<br>语法：bzip2 选项  [-k] [文件]<br>            -k 产生压缩文件后保留原文件<br>功能描述：压缩文件<br>压缩后文件格式：.bz2<br>范例：$ bzip2 -k boduo<br>      $ tar -cjf Japan.tar.bz2.Japan</p>
-<pre><code>解压缩命令：bunzip2
-</code></pre><p>命令名称：bunzip2<br>命令所在路径：/usr/bin/bunzip2<br>执行权限：所有用户<br>语法：bunzip2 选项  [-k] [压缩文件]<br>            -k 解压缩后保留原文件<br>功能描述：解压缩<br>范例：$ bunzip2 -k shaochao.bz2<br>      $ tar -xjf shaochao.tar.bz2</p>
+    <pre><code>vim 简介
+</code></pre><p>Vim是一个功能强大的全屏幕文本编辑器，是Linux/UNIX上最常用的文本编辑器，它的作用是建立、编辑、显示文本文件。</p>
+<p>Vim 没有菜单，只有命令</p>
+<p>进入       vi filename<br>编辑模式   输入:进入编辑模式 :set nu 可以设置行号   命令以回车运行<br>插入模式   输入i a o<br>保存退出       ESC键  输入:wq</p>
+<pre><code>插入命令
+</code></pre><p>命令   作用<br>a  在光标所在字符后插入<br>A  在光标所在行尾插入<br>i  在光标所在字符前插入<br>I  在光标所在行行首插入<br>o  在光标下插入新行<br>O  在光标上插入整行</p>
+<pre><code>定位命令
+</code></pre><p>: set nu    设置行号<br>: set nonu  取消行号<br>gg          到第一行<br>G           到最后一行<br>nG          到第n行<br>:n          到第n行<br>$           移至行尾<br>0           移至行首</p>
+<pre><code>删除命令
+</code></pre><p>x     删除光标所在处字符<br>nx    删除光标所在处n个字符<br>dd    删除光标所在行,ndd删除n行<br>dG    删除光标所在行到文件末尾内容<br>D     删除光标所在处到行尾内容<br>:n1,n2d  删除指定范围的行   :100,200d 删除第100到第200行</p>
+<pre><code>复制和剪切命令
+</code></pre><p>yy   复制当前行<br>nyy  复制当前行以下n行<br>dd   剪切当前行<br>ndd  剪切当前行一下n行<br>p、P 粘贴在当前光标所在行下或行上</p>
+<pre><code>替换和取消命令
+</code></pre><p>r   取消光标所在处字符<br>R   从光标所在处开始替换字符，按Esc结束<br>u   取消上一步操作</p>
+<pre><code>搜索和搜索替换命令
+</code></pre><p>/string            搜索指定字符串   搜索时忽略大小写：set ic<br>n                  搜索指定字符串的下一个出现位置<br>:%s/old/new/g      全文替换指定字符串<br>:nl,n2s/old/new/g  在一定范围内替换指定字符串</p>
+<p>##保存和退出命令<br>:w   保存修改<br>:w new_filename   另存为指定文件<br>:wq  保存修改并退出<br>ZZ    快捷键，保存修改并退出<br>:q!   不保存修改退出<br>:wq!  保存修改并退出(文件所有者及root可使用)</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -225,7 +216,7 @@
       
         <div>
           原文链接: 
-          <a href target="_blank">https://hanpeng666.github.io/undefined/linux压缩解压命令/</a>
+          <a href target="_blank">https://hanpeng666.github.io/posts/vim常用操作/</a>
         </div>
       
       <div>
@@ -236,7 +227,7 @@
   
     <div class="passage-tags">
      
-      <a href="/tags/linux/"><i class="fa fa-tags"></i>linux</a>
+      <a href="/tags/vim/"><i class="fa fa-tags"></i>vim</a>
     
     </div>
   
@@ -353,10 +344,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/undefined/test/" data-enable="true">
+    <a href="/posts/hello-world/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/undefined/hello-world/" data-enable="true">
+    <a href="/posts/test/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
