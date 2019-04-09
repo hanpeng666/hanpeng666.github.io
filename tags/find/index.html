@@ -6,12 +6,12 @@
   <meta name="author" content="Dong Yuanxin">
   
   
-  <title>mysql增、删、改、查sql语句 | 韩鹏的个人博客</title>
+  <title>标签: find | 韩鹏的个人博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="mysql,sql语句,">
+    <meta name="keywords" content="Hexo, Theme-AD">
   
 
   
@@ -42,7 +42,7 @@
     welcome: {"enable":false,"interval":30},
     start_time: "2019-04-04",
     passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
-    is_post: true,
+    is_post: false,
     lock: false,
     author: "Dong Yuanxin",
     share: {"twitter":true,"facebook":true,"weibo":true,"qq":true,"wechat":true},
@@ -160,98 +160,19 @@
 </nav>
 <div id="site-process"></div>
     <main>
-      
-  <div class="passage">
-  <div class="passage-meta">
-    <span>
-      <i class="fa fa-calendar"></i>2019-04-07
-    </span>
-    
-      <span>
-        | <a href="/categories/mysql/"><i class="fa fa-bookmark"></i>mysql</a>
-      </span>
-    
-    
-      <span>
-        | <i class="fa fa-unlock-alt"></i>UNLOCK
-      </span>
-    
-  </div>
-  <h1 class="passage-title">
-    mysql增、删、改、查sql语句
-  </h1>
+      <div class="timeline">
+  <h2 class="timeline-title">标签: find</h2>
   
-    <div class="passage-cover">
-      <figure style="background-image:url(https://hanpeng666.github.io/images/mysql.jpg);"></figure>
-    </div>
-  
-  <article class="passage-article">
-    <h2 id="mysql表内容操作-增、删、改、查"><a href="#mysql表内容操作-增、删、改、查" class="headerlink" title="mysql表内容操作 增、删、改、查"></a>mysql表内容操作 增、删、改、查</h2><h3 id="一、增"><a href="#一、增" class="headerlink" title="一、增"></a>一、增</h3><p>insert into 表 (列名，列名…) values (值，值,…)[,(值，值，…),…]<br>insert into 表 set 列名1=””,列名2=””,…<br>insert into 表 (列名，列名…) select (列名，列名…) from 表</p>
-<p>例如：<br>insert into tutors set tname=’tom’,gender=’f’,age=30;<br>insert into tutors (tname,gender,age) select name,gender,age from student where age &gt;20;</p>
-<h3 id="二、删"><a href="#二、删" class="headerlink" title="二、删"></a>二、删</h3><p>delete from 表  #删除表里所有数据<br>delete from 表 where name=”shaochao” #删除name=”shaochao”那一行数据</p>
-<h3 id="三、改"><a href="#三、改" class="headerlink" title="三、改"></a>三、改</h3><p>update 表 set name=”zhansan” where id&gt;8;</p>
-<h3 id="四、查"><a href="#四、查" class="headerlink" title="四、查"></a>四、查</h3><p>查这块的条件太多了，我简单列举几个常用的</p>
-<pre><code>一、简单查询
-</code></pre><p>a、条件判断where<br>WHERE子句：<br>1.布尔关系表达式 =、&gt;、&gt;=、&lt;=、&lt;<br>2.逻辑关系：AND OR NOT<br>select <em> from 表 where id &gt; 1 and name !=’hanshao’;<br>select </em> from 表 where time between ‘2017-08-04 00:00:00’ and ‘2017-08-08 10:30:00’;<br>select <em> from 表 where id in (11,22,33);<br>select </em> from 表 where id in (select id from 表2);</p>
-<p>b、通配符like<br>%: 任意长度任意字符<br>_：任意单个字符<br>select name from student where name like ‘y%’; #查询名字以y开头的<br>select name from student where name like ‘y__’; #查询名字以y开头长度为3的<br>select name from student where name like ‘%ing%’; #包含ing的名字<br>rlike 正则匹配<br>select name from student where name rlike ‘^[mny].*$’; #正则匹配以m 或 n 或y开头的名字</p>
-<p>c、限制limit<br>select <em> from 表 limit 5;   #前5行<br>select </em> from 表 limit 2,3; #从第2行开始的3行</p>
-<p>d、排序asc,desc<br>select <em> from 表 order by 列 asc; #默认 升序 从小到大排列<br>select </em> from 表 order by 列 desc; #降序 从大到小排列<br>select * from 表 order by 列1 desc,列2 asc #根据列1 从大到小排列，如果相同则按列2从小到大排列</p>
-<p>e、聚合：SUM(), MIN(), MAX(), AVG(), COUNT()<br>select avg(age) from students;  所有同学的平均年龄<br>select max(age) from students;  年龄最大<br>select min(age) from students;  年龄最小<br>select sum(age) from students;  年龄之和<br>select count(age) from students;  一共有多少人</p>
-<p>f、分组group by 主要目的进行聚合计算）<br>select num from 表 group by num<br>select avg(age)from student group by gender(性别）; 男同学跟女同学的平均年龄<br>特别的：group by 必须在where之后，order by之前</p>
-<p>g、HAVING qualification(过滤条件）<br>select count(cid1) as persons,cid1 from student group by cid1 having person &gt; 2;(having可以直接引用别名做比较，having只能在group by里面使用，相</p>
-<p>当于where，用于将group by分组结果再进行过滤)</p>
-<p>h、查询结果不显示重复记录<br>SELECT DISTINCT 字段名 FROM 表名 WHERE 查询条件</p>
-<pre><code>二、多表查询
-</code></pre><p>连接：<br>          内连接：将两个表中存在连结关系的字段符合连接条件的记录形成记录集<br>select a.name,b.name from a inner join b on a.id=b.id;<br>select a.name,b.name from a join b on a.id=b.id;<br>结果是一样的（内连接的inner关键字可省略）<br>        外连接：<br>            左外连接：… LEFT JOIN … ON …   (以左表为基准，右表没有的左表有的显示null，保存左表的全部记录)<br>sselect a.id,b.age from a left join b on a.id=b.id;<br>            右外连接: … RIGHT JOIN … ON …<br>        自连接：(回到自身找答案的)<br>select c.name as teacher,c.name as student from students as s,students as c where s.sid=c.tid;(同一个表查询）</p>
-<pre><code>联合查询：UNION
-</code></pre><p>（select name,age from student）union (select name,age from tutors);  两个表查询的结果都显示在一起</p>
-<pre><code>三、子查询
-</code></pre><p>select name from student where age &gt; (select avg(age)from student);<br>    IN(): 使用子查询；<br>select name from student where age in (select age from tutors);<br>    在FROM中使用子查询；<br>select name,age from (select name,age from student)as t where t.age &gt;= 20; (在查询出来的结果再进行比较查询）</p>
-
-  </article>
-  <aside class="table-content" id="site-toc">
-  <div class="table-content-title">
-    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
-    <span>目录</span>
-  </div>
-  <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#mysql表内容操作-增、删、改、查"><span class="toc-text">mysql表内容操作 增、删、改、查</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、增"><span class="toc-text">一、增</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、删"><span class="toc-text">二、删</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、改"><span class="toc-text">三、改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、查"><span class="toc-text">四、查</span></a></li></ol></li></ol>
-  </div>
-</aside>
-  
-    <aside class="passage-copyright">
-      <div>本文作者: 韩鹏</div>
-      
-        <div>
-          原文链接: 
-          <a href target="_blank">https://hanpeng666.github.io/posts/mysql增、删、改、查sql语句/</a>
-        </div>
-      
-      <div>
-        版权声明: 本博客所有文章除特别声明外,转载请注明出处!
-      </div>
-    </aside>
-  
-  
-    <div class="passage-tags">
-     
-      <a href="/tags/sql语句/"><i class="fa fa-tags"></i>sql语句</a>
     
+      <h3 class="timeline-subtitle">2019</h3>
+    
+    <div class="timeline-item">
+      <time>2019-04-09</time>
+      <a target="_self" href="/posts/linux文件查找命令find/">linux文件查找命令find</a>
     </div>
   
 </div>
-
     </main>
-    
-      
-<div class="site-comment-contanier" data-plateform="leancloud">
-  
-    <p id="site-comment-info">
-      <i class="fa fa-spinner fa-spin"></i> 评论加载中
-    </p>
-    <div id="site-comment"></div>
-  
-</div>
     
     <div class="site-footer-wrapper">
   <footer class="site-footer">
@@ -352,19 +273,19 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/posts/linux文件查找命令find/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/posts/hello-world/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
   <div class="bottom-bar-right">
-    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
       <i class="fa fa-bars"></i>
     </a>
     
-      <a href="#site-comment" data-enable="true">
+      <a href="javascript:void(0);" data-enable="false">
         <i class="fa fa-commenting"></i>
       </a>
     

@@ -6,16 +6,16 @@
   <meta name="author" content="Dong Yuanxin">
   
   
-  <title>mysql增、删、改、查sql语句 | 韩鹏的个人博客</title>
+  <title>linux文件查找命令find | 韩鹏的个人博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="mysql,sql语句,">
+    <meta name="keywords" content="linux,linux,find,">
   
 
   
-  <meta name="description" content="韩鹏的小站">
+  <meta name="description" content="find命令是各种Linux发现版中比较重要的、常用的一个命令，该命令功能强大，熟练掌握了这个命令的使用，对平时的系统运维、管理工作会起到事半功倍的效果。">
 
   
 
@@ -164,11 +164,11 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2019-04-07
+      <i class="fa fa-calendar"></i>2019-04-09
     </span>
     
       <span>
-        | <a href="/categories/mysql/"><i class="fa fa-bookmark"></i>mysql</a>
+        | <a href="/categories/linux/"><i class="fa fa-bookmark"></i>linux</a>
       </span>
     
     
@@ -178,36 +178,65 @@
     
   </div>
   <h1 class="passage-title">
-    mysql增、删、改、查sql语句
+    linux文件查找命令find
   </h1>
   
-    <div class="passage-cover">
-      <figure style="background-image:url(https://hanpeng666.github.io/images/mysql.jpg);"></figure>
-    </div>
-  
   <article class="passage-article">
-    <h2 id="mysql表内容操作-增、删、改、查"><a href="#mysql表内容操作-增、删、改、查" class="headerlink" title="mysql表内容操作 增、删、改、查"></a>mysql表内容操作 增、删、改、查</h2><h3 id="一、增"><a href="#一、增" class="headerlink" title="一、增"></a>一、增</h3><p>insert into 表 (列名，列名…) values (值，值,…)[,(值，值，…),…]<br>insert into 表 set 列名1=””,列名2=””,…<br>insert into 表 (列名，列名…) select (列名，列名…) from 表</p>
-<p>例如：<br>insert into tutors set tname=’tom’,gender=’f’,age=30;<br>insert into tutors (tname,gender,age) select name,gender,age from student where age &gt;20;</p>
-<h3 id="二、删"><a href="#二、删" class="headerlink" title="二、删"></a>二、删</h3><p>delete from 表  #删除表里所有数据<br>delete from 表 where name=”shaochao” #删除name=”shaochao”那一行数据</p>
-<h3 id="三、改"><a href="#三、改" class="headerlink" title="三、改"></a>三、改</h3><p>update 表 set name=”zhansan” where id&gt;8;</p>
-<h3 id="四、查"><a href="#四、查" class="headerlink" title="四、查"></a>四、查</h3><p>查这块的条件太多了，我简单列举几个常用的</p>
-<pre><code>一、简单查询
-</code></pre><p>a、条件判断where<br>WHERE子句：<br>1.布尔关系表达式 =、&gt;、&gt;=、&lt;=、&lt;<br>2.逻辑关系：AND OR NOT<br>select <em> from 表 where id &gt; 1 and name !=’hanshao’;<br>select </em> from 表 where time between ‘2017-08-04 00:00:00’ and ‘2017-08-08 10:30:00’;<br>select <em> from 表 where id in (11,22,33);<br>select </em> from 表 where id in (select id from 表2);</p>
-<p>b、通配符like<br>%: 任意长度任意字符<br>_：任意单个字符<br>select name from student where name like ‘y%’; #查询名字以y开头的<br>select name from student where name like ‘y__’; #查询名字以y开头长度为3的<br>select name from student where name like ‘%ing%’; #包含ing的名字<br>rlike 正则匹配<br>select name from student where name rlike ‘^[mny].*$’; #正则匹配以m 或 n 或y开头的名字</p>
-<p>c、限制limit<br>select <em> from 表 limit 5;   #前5行<br>select </em> from 表 limit 2,3; #从第2行开始的3行</p>
-<p>d、排序asc,desc<br>select <em> from 表 order by 列 asc; #默认 升序 从小到大排列<br>select </em> from 表 order by 列 desc; #降序 从大到小排列<br>select * from 表 order by 列1 desc,列2 asc #根据列1 从大到小排列，如果相同则按列2从小到大排列</p>
-<p>e、聚合：SUM(), MIN(), MAX(), AVG(), COUNT()<br>select avg(age) from students;  所有同学的平均年龄<br>select max(age) from students;  年龄最大<br>select min(age) from students;  年龄最小<br>select sum(age) from students;  年龄之和<br>select count(age) from students;  一共有多少人</p>
-<p>f、分组group by 主要目的进行聚合计算）<br>select num from 表 group by num<br>select avg(age)from student group by gender(性别）; 男同学跟女同学的平均年龄<br>特别的：group by 必须在where之后，order by之前</p>
-<p>g、HAVING qualification(过滤条件）<br>select count(cid1) as persons,cid1 from student group by cid1 having person &gt; 2;(having可以直接引用别名做比较，having只能在group by里面使用，相</p>
-<p>当于where，用于将group by分组结果再进行过滤)</p>
-<p>h、查询结果不显示重复记录<br>SELECT DISTINCT 字段名 FROM 表名 WHERE 查询条件</p>
-<pre><code>二、多表查询
-</code></pre><p>连接：<br>          内连接：将两个表中存在连结关系的字段符合连接条件的记录形成记录集<br>select a.name,b.name from a inner join b on a.id=b.id;<br>select a.name,b.name from a join b on a.id=b.id;<br>结果是一样的（内连接的inner关键字可省略）<br>        外连接：<br>            左外连接：… LEFT JOIN … ON …   (以左表为基准，右表没有的左表有的显示null，保存左表的全部记录)<br>sselect a.id,b.age from a left join b on a.id=b.id;<br>            右外连接: … RIGHT JOIN … ON …<br>        自连接：(回到自身找答案的)<br>select c.name as teacher,c.name as student from students as s,students as c where s.sid=c.tid;(同一个表查询）</p>
-<pre><code>联合查询：UNION
-</code></pre><p>（select name,age from student）union (select name,age from tutors);  两个表查询的结果都显示在一起</p>
-<pre><code>三、子查询
-</code></pre><p>select name from student where age &gt; (select avg(age)from student);<br>    IN(): 使用子查询；<br>select name from student where age in (select age from tutors);<br>    在FROM中使用子查询；<br>select name,age from (select name,age from student)as t where t.age &gt;= 20; (在查询出来的结果再进行比较查询）</p>
+    <p></p>
+<h2 id="find："><a href="#find：" class="headerlink" title="find："></a>find：</h2><pre><code>实时
+精确
+支持众多查找标准
+遍历指定目录中的所有文件完成查找，速度慢；
+</code></pre><p>find 查找路径 查找标准 查找到以后的处理运作<br>查找路径：默认为当前目录<br>查找标准：默认为指定路径下的所有文件<br>处理运作：默认为显示</p>
+<h2 id="匹配标准："><a href="#匹配标准：" class="headerlink" title="匹配标准："></a>匹配标准：</h2><pre><code>-name &apos;FILENAME&apos;：对文件名作精确匹配
+    文件名通配：
+        *：任意长度的任意字符
+        ?
+        []
+-iname &apos;FILENAME&apos;: 文件名匹配时不区分大小写
+-regex PATTERN：基于正则表达式进行文件名匹配
 
+-user USERNAME: 根据属主查找
+-group GROUPNAME: 根据属组查找
+
+-uid UID: 根据UID查找
+-gid GID: 根据GID查找
+
+-nouser：查找没有属主的文件
+-nogroup: 查找没有属组的文件
+
+-type
+    f: 普通文件
+    d   目录
+    c  字符文件
+    b  块设备
+    l  连接文件
+    p  管道设备
+    s  套接文件
+
+-size [+|-]
+    #k
+    #M
+    #G
+</code></pre><h2 id="组合条件："><a href="#组合条件：" class="headerlink" title="组合条件："></a>组合条件：</h2><pre><code>-a
+-o
+-not
+</code></pre><p>/tmp目录，不是目录，并且还不能套接字类型的文件<br>find /tmp -not -type d -a -not -type p<br>/tmp/test目录下，属主不是user1，也不是user2的文件；<br>find ./ -not -user user1 -a -not -user user2<br>find ./ -not (-user user1 -o -not -user user2 )<br>    -mtime 以天为单位最近一次内容修改时间<br>    -ctime 以天为单位最近一次属性修改时间<br>    -atime 访问时间  +5 表示在五天之前访问过 -5 五天之内访问 5 刚好五天访问<br>        [+|-]#   天<br>    -mmin<br>    -cmin<br>    -amin<br>        [+|-]#  分钟</p>
+<pre><code>-perm MODE：精确匹配
+    /MODE: 任意一位匹配即满足条件
+    -MODE: 文件权限能完全包含此MODE时才符合条件
+</code></pre><p>find ./ -perm 644 查找权限为644的文件<br>find ./ -perm /644 任意一个权限匹配的文件   或者的意思<br>find ./ -perm -644 每一位都必须满足  644 755都可以   与关系的意思<br>        -644<br>        644: rw-r–r–<br>        755: rwxr-xr-x<br>        750: rwxr-x—<br>    find ./ -perl -001  查找有执行权限的</p>
+<h2 id="运作："><a href="#运作：" class="headerlink" title="运作："></a>运作：</h2><pre><code>-print: 显示， 默认
+-ls：类似ls -l的形式显示每一个文件的详细
+-ok COMMAND {} \; 每一次操作都需要用户确认
+-exec COMMAND {} \;
+</code></pre><p>{} 前面查找引用文件的文件名</p>
+<p>1、查找/var目录下属主为root并且属组为mail的所有文件；<br>find /var -user root -group mail</p>
+<p>2、查找/usr目录下不属于root,bin,或student的文件；<br>find /usr -not -user root -a -not -user bin -a -not -user student<br>find /usr -not ( -user root -o -user bin -o -user student )</p>
+<p>3、查找/etc目录下最近一周内内容修改过且不属于root及student用户的文件；<br>find /etc -mtime -7 -not \ ( -user root -o -user student )<br>find /etc -mtime -7 -not -user root -a -not -user student</p>
+<p>4、查找当前系统上没有属主或属组且最近1天内曾被访问过的文件，并将其属主属组均修改为root；<br>find / ( -nouser -o -nogroup ) -a -atime -1 -exec chown root:root {} \;</p>
+<p>5、查找/etc目录下大于1M的文件，并将其文件名写入/tmp/etc.largefiles文件中；<br>find /etc -size +1M &gt;&gt; /tmp/etc.largefiles</p>
+<p>6、查找/etc目录下所有用户都没有写权限的文件，显示出其详细信息；<br>find /etc -not -perm /222 -ls</p>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -215,7 +244,7 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#mysql表内容操作-增、删、改、查"><span class="toc-text">mysql表内容操作 增、删、改、查</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、增"><span class="toc-text">一、增</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、删"><span class="toc-text">二、删</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、改"><span class="toc-text">三、改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、查"><span class="toc-text">四、查</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#find："><span class="toc-text">find：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#匹配标准："><span class="toc-text">匹配标准：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组合条件："><span class="toc-text">组合条件：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运作："><span class="toc-text">运作：</span></a></li></ol>
   </div>
 </aside>
   
@@ -224,7 +253,7 @@
       
         <div>
           原文链接: 
-          <a href target="_blank">https://hanpeng666.github.io/posts/mysql增、删、改、查sql语句/</a>
+          <a href target="_blank">https://hanpeng666.github.io/posts/linux文件查找命令find/</a>
         </div>
       
       <div>
@@ -235,7 +264,9 @@
   
     <div class="passage-tags">
      
-      <a href="/tags/sql语句/"><i class="fa fa-tags"></i>sql语句</a>
+      <a href="/tags/linux/"><i class="fa fa-tags"></i>linux</a>
+     
+      <a href="/tags/find/"><i class="fa fa-tags"></i>find</a>
     
     </div>
   
@@ -352,10 +383,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/posts/linux文件查找命令find/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/posts/hello-world/" data-enable="true">
+    <a href="/posts/mysql增、删、改、查sql语句/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
